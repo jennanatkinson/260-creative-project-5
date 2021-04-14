@@ -1,0 +1,69 @@
+    curl -d '{
+    "name": "Blueberry Muffins",
+    "price": "3.99",
+    "image": "blueberry-muffins.jpg",
+    "recipe": "blueberry-muffin-recipe.json",    
+        "dairyFree": true,
+        "nutFree": true,
+        "vegan": false        
+    }' -H 'Content-Type: application/json' http://localhost:3001/api/products
+
+    curl -d '{
+    "name": "Croissants",
+    "price": "2.99",
+    "image": "croissants.jpg",
+    "recipe": "croissant-recipe.json",    
+        "dairyFree": false,
+        "nutFree": true,
+        "vegan": false        
+    }' -H 'Content-Type: application/json' http://localhost:3001/api/products
+
+    curl -d '{
+    "name": "Fudge Brownie",
+    "price": "4.99",
+    "image": "fudge-brownie.jpg",
+    "recipe": "fudge-brownie-recipe.json",    
+        "dairyFree": false,
+        "nutFree": false,
+        "vegan": false   
+    }' -H 'Content-Type: application/json' http://localhost:3001/api/products
+
+    curl -d '{
+    "name": "Macarons",
+    "price": "14.99",
+    "image": "macarons.jpg",
+    "recipe": "macarons-recipe.json",   
+        "dairyFree": true,
+        "nutFree": true,
+        "vegan": true        
+    }' -H 'Content-Type: application/json' http://localhost:3001/api/products
+
+    curl -d '{
+    "name": "Mousse Cake",
+    "price": "6.99",
+    "image": "mousse-cake.jpg",
+    "recipe": "mousse-cake-recipe.json",    
+        "dairyFree": false,
+        "nutFree": true,
+        "vegan": false        
+    }' -H 'Content-Type: application/json' http://localhost:3001/api/products
+
+    curl -d '{
+    "name": "Rolls",
+    "price": "12.50",
+    "image": "rolls.jpg",
+    "recipe": "rolls-recipe.json",    
+        "dairyFree": true,
+        "nutFree": true,
+        "vegan": false        
+    }' -H 'Content-Type: application/json' http://localhost:3001/api/products
+
+    curl -d '{
+    "name": "Fruit Tart",
+    "price": "5.99",
+    "image": "tart.jpg",
+    "recipe": "fruit-tart-recipe.json",
+    "dairyFree": true,
+    "nutFree": true,
+    "vegan": true
+    }' -H 'Content-Type: application/json' http://localhost:3001/api/products
