@@ -9,7 +9,8 @@
         <img src="~@/assets/hamburger-menu-icon.png" />
       </div>
       <div id="navigation" v-if="!mobileView || showNav">
-        <p id="account"><router-link to="/account">account</router-link></p>
+        <p id="account"><router-link to="/account">{{accountMessage}}</router-link></p>
+        <p id="logout" v-if="accountCreated" @click="logout">log out</p>
         <ul id="nav-list" v-bind:class="{ flexDisplay: !mobileView, center: !mobileView }">
           <li><router-link to="/"><img src="~@/assets/images/golden-spoon.png"></router-link></li>
           <li><router-link to="/">HOME</router-link></li>
@@ -28,13 +29,14 @@
     <!--Footer-->
     <div class="footer">
       <p>© Jenna Atkinson, 2021</p>
-      <a href="https://github.com/jsunshine321/260-creative-project-4">Git Hub Repository</a>
+      <a href="https://github.com/jsunshine321/260-creative-project-5">Git Hub Repository</a>
+      <p>Hours spent on project: 9</p>
     </div>
   </div>
 </template>
 
 <script>
-
+import axios from 'axios';
 export default {
   data: () => {
     return {
@@ -45,9 +47,23 @@ export default {
   created() { //add get logged in user for lab5
     window.addEventListener("resize", this.handleView);
     this.handleView();
+    this.getLoggedInUser();
   },
   destroyed() {
     window.removeEventListener("resize", this.handleView);
+  },
+  computed: {
+    accountCreated() {
+      return !(this.$root.$data.user === null || this.$root.$data.user === undefined);
+    },
+    accountMessage() {
+      if (this.accountCreated) {
+        return "account";
+      }
+      else {
+        return "login/sign up";
+      }
+    }
   },
   methods: {
     handleView() {
@@ -55,7 +71,23 @@ export default {
     },
     toggleNav() {
       this.showNav = !this.showNav;
-    }
+    },
+    async getLoggedInUser() {
+      try { //see if we are already logged in
+        let response = await axios.get('/api/users');
+        this.$root.$data.user = response.data.user;
+      } catch (error) {
+        this.$root.$data.user = null;
+      }
+    },
+    async logout() {
+      try {
+        await axios.delete("/api/users");
+        this.$root.$data.user = null;
+      } catch (error) {
+        this.$root.$data.user = null;
+      }
+    },
   }
 }
 </script>
@@ -80,6 +112,9 @@ a:visited {
 #navigation-icon {
   cursor: pointer;
 }
+#logout {
+  cursor: pointer;
+}
 #navigation-icon img {
   width: 5%;
 }
@@ -101,9 +136,18 @@ ul#nav-list li {
 #navigation a {
   text-decoration: none;
 }
-#account {
+#logout {
   position: absolute;
   right: 30px;
+  top: 7px;
+  color: grey;
+}
+#logout:hover {
+  color: black;
+}
+#account {
+  position: absolute;
+  right: 100px;
   top: 7px;
 }
 #nav-list {
@@ -159,11 +203,26 @@ h1, h2, h3, h4 {
 .footer a {
   color: white;
 }
-
-@media screen and (min-width: 400px) {
+@media screen and (min-width: 800px) and (max-width: 1036px) {
+  #account {
+    position: absolute;
+    right: 30px;
+    top: 50px;
+  }
+  #logout {
+    top: 35px;
+  }
+  .top-bar {
+    height: 70px;
+  }
+  ul#nav-list.flexDisplay.center {
+    margin-top: 30px;
+    margin-bottom: 0px;
+  }
 }
-@media screen and (min-width: 900px) {
+/*@media screen and (max-width: 1000px) {
 
-}
+
+}*/
 
 </style>

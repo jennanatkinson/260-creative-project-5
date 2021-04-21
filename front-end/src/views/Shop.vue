@@ -21,7 +21,7 @@
           </div>
         </div>
       </div>
-      <ProductList :products="products" />
+      <ProductList :products="products"/>
     </div>
   </div>
 </template>
